@@ -1,0 +1,41 @@
+$mobileSmall:       320px;
+$mobile:            480px;
+$tabletSmall:       640px;
+$tablet:            768px;
+$tabletLandscape:   1024px;
+$laptopSmall:       1120px;
+$laptop:            1200px;
+$desktop:           1440px;
+$desktopLarge:      1600px;
+
+@mixin breakpointMax($size) {
+  @media screen and (max-width: ($size)) {
+    @content;
+  }
+}
+
+@mixin breakpoint($size) {
+  @media screen and (min-width: $size) {
+    @content;
+  }
+}
+
+@mixin font($size, $lineHeight: 1.2, $font: $mainFontName, $color: inherit, $weight: 400) {
+  font-size: $size;
+  line-height: $lineHeight;
+  font-family: $font;
+  color: $color;
+  font-weight: $weight;
+}
+
+@mixin flex($justify-content: flex-start, $align-items: stretch) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin flexCenter() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
