@@ -1,133 +1,262 @@
 <template>
   <footer class="footer">
     <div class="footer__container">
+      <div class="footer__main">
+        <div class="footer__brand">
+          <a
+            href="#main"
+            class="footer__logo"
+          >
+            Zaitsev<span>.webdev</span>
+          </a>
 
-      <div class="footer__info">
-        <h3 class="footer__name">Alexander Zaitsev</h3>
-        <p class="footer__desc">Створюю прості та зрозумілі сайти для малого бізнесу</p>
-      </div>
+          <p class="footer__description">
+            Прості та зрозумілі сайти для малого бізнесу —
+            від структури до запуску.
+          </p>
+        </div>
 
-      <div class="footer__nav">
-        <h4 class="footer__title">Навігація:</h4>
-        <ul class="footer__links">
-          <li><a href="#advantages" class="footer__link">Що ви отримаєте?</a></li>
-          <li><a href="#portfolio" class="footer__link">Кейси</a></li>
-          <li><a href="#workflow" class="footer__link">Як я працюю</a></li>
-          <li><a href="#about" class="footer__link">Про мене</a></li>
-        </ul>
-      </div>
+        <nav
+          class="footer__navigation"
+          aria-label="Навігація у футері"
+        >
+          <h3 class="footer__heading">
+            Навігація
+          </h3>
 
-      <div class="footer__contacts">
-        <h4 class="footer__title">Контакти:</h4>
-        <div class="footer__contacts-data">
-          <a href="https://t.me/zaitsev_oleksandr" target="_blank" class="footer__link">Telegram: @zaitsev_oleksandr</a>
-          <a href="mailto:szaitsev000@gmail.com" class="footer__link">Email: szaitsev000@gmail.com</a>
+          <ul class="footer__links">
+            <li>
+              <a href="#main" class="footer__link">
+                Головна
+              </a>
+            </li>
+
+            <li>
+              <a href="#projects" class="footer__link">
+                Проєкти
+              </a>
+            </li>
+
+            <li>
+              <a href="#about" class="footer__link">
+                Про мене
+              </a>
+            </li>
+
+            <li>
+              <a href="#contacts" class="footer__link">
+                Контакти
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="footer__contacts">
+          <h3 class="footer__heading">
+            Контакти
+          </h3>
+
+          <div class="footer__contact-list">
+            <a
+              href="https://t.me/zaitsev_oleksandr"
+              class="footer__link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Telegram
+            </a>
+
+            <a
+              href="mailto:zaitsev.webdev@gmail.com"
+              class="footer__link"
+            >
+              zaitsev.webdev@gmail.com
+            </a>
+          </div>
         </div>
       </div>
 
-    </div>
-
-    <div class="footer__copyright">
-      © 2026 Олександр Зайцев
+      <div class="footer__bottom">
+        <p>
+          © {{ currentYear }} Олександр Зайцев
+        </p>
+      </div>
     </div>
   </footer>
 </template>
 
+<script setup lang="ts">
+const currentYear = new Date().getFullYear()
+</script>
+
 <style lang="scss">
-  .footer {
-    background-color: #1a1a1a;
-    padding-top: 48px;
-    padding-bottom: 24px;
-    border-top: 1px solid #333333;
+.footer {
+  background-color: $primary-bg;
+  border-top: 1px solid rgba($text-light, 0.1);
 
-    &__container {
-      max-width: 1440px;
-      width: 100%;
-      margin: 0 auto;
-      padding-left: 24px;
-      padding-right: 24px;
-      box-sizing: border-box;
+  &__container {
+    width: 100%;
+  }
 
-      @include flex(flex-start, flex-start);
-      flex-direction: column;
-      gap: 24px;
+  &__main {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
 
-      @include breakpoint($tabletLandscape) {
-        flex-direction: row;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 32px;
-      }
+    @include breakpoint($tablet) {
+      padding-right: 32px;
+      padding-left: 32px;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 60px;
     }
 
-    &__desc, &__links, &__contacts-data, &__title {
-      @include font(14px, 1.2, $mainFontName, #E0E0E0, 600);
+    @include breakpoint($tabletLandscape) {
+      padding-top: 64px;
+      padding-bottom: 58px;
+      grid-template-columns: minmax(0, 1.8fr) 0.85fr 1fr;
+      gap: 100px;
     }
 
-    &__info {
-      max-width: 263px;
-      @include flex(flex-start, flex-start);
-      flex-direction: column;
-      gap: 14px;
+    @include breakpoint($laptop) {
+      padding-right: 0;
+      padding-left: 0;
     }
+  }
 
-    &__name {
-      @include font(24px, 1.2, $mainFontName, #E0E0E0, 600);
+  &__brand {
+    max-width: 330px;
+  }
+
+  &__logo {
+    display: inline-block;
+    margin-bottom: 22px;
+    text-decoration: none;
+
+    @include font(
+      17px,
+      1,
+      $mainFontName,
+      $text-light,
+      700
+    );
+
+    span {
+      color: $color-accent;
+    }
+  }
+
+  &__description {
+    max-width: 310px;
+    margin: 0;
+
+    @include font(
+      14px,
+      1.65,
+      $mainFontName,
+      $text-muted,
+      400
+    );
+  }
+
+  &__navigation {
+    min-width: 0;
+  }
+
+  &__heading {
+    margin: 0 0 22px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+
+    @include font(
+      10px,
+      1.3,
+      monospace,
+      $text-muted,
+      500
+    );
+  }
+
+  &__links {
+    margin: 0;
+    padding: 0;
+    gap: 16px;
+    list-style: none;
+    flex-direction: column;
+    @include flex(flex-start, flex-start);
+
+    li {
       margin: 0;
-    }
-
-    &__title {
-      margin-top: 0;
-      margin-bottom: 14px;
-    }
-
-    &__nav {
-      @include flex(flex-start, flex-start);
-      flex-direction: column;
-    }
-
-    &__links {
-      list-style: none;
       padding: 0;
-      margin: 0;
-      @include flex(flex-start, flex-start);
-      flex-direction: column;
-      gap: 8px;
     }
+  }
 
-    &__contacts {
-      @include flex(flex-start, flex-start);
-      flex-direction: column;
+  &__contacts {
+    min-width: 0;
+  }
+
+  &__contact-list {
+    gap: 16px;
+    flex-direction: column;
+    @include flex(flex-start, flex-start);
+  }
+
+  &__link {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    transition:
+      color 0.25s ease,
+      transform 0.25s ease;
+
+    @include font(
+      14px,
+      1.3,
+      $mainFontName,
+      $text-light,
+      400
+    );
+
+    &:hover {
+      color: $color-accent;
+      transform: translateX(3px);
     }
+  }
 
-    &__contacts-data {
-      @include flex(flex-start, flex-start);
-      flex-direction: column;
-      gap: 8px;
-    }
+  &__bottom {
+    width: 100%;
+    border-top: 1px solid rgba($text-light, 0.1);
 
-    &__link {
-      color: inherit;
-      text-decoration: none;
-      transition: color 0.2s ease;
-
-      &:hover {
-        color: #2EC4B6;
-      }
-    }
-
-    &__copyright {
-      @include font(14px, 1.2, $mainFontName, #AFAFAF, 600);
-      @include flexCenter();
-      padding-top: 24px;
-      border-top: 1px solid #2d2d2d;
-      text-align: center;
+    p {
       width: 100%;
-      margin-top: 32px;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px 20px;
+      box-sizing: border-box;
+      letter-spacing: 0.4px;
 
-      @include breakpoint($tabletLandscape) {
-        margin-top: 48px;
+      @include font(
+        11px,
+        1.3,
+        monospace,
+        $text-muted,
+        400
+      );
+
+      @include breakpoint($tablet) {
+        padding-right: 32px;
+        padding-left: 32px;
+      }
+
+      @include breakpoint($laptop) {
+        padding-right: 0;
+        padding-left: 0;
       }
     }
   }
+}
 </style>

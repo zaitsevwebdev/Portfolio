@@ -1,269 +1,425 @@
 <template>
-  <section id="about-contact" class="about-contact">
-    <div class="about-contact__container">
+  <section id="contacts" class="contact">
+    <div class="contact__container">
+      <div class="contact__info">
+        <h2 class="contact__title">
+          Обговоримо ваш проєкт
+        </h2>
 
-      <div id="about" class="about-contact__info">
-        <h2 class="about-contact__title">Про мене</h2>
-        <div class="about-contact__bio">
-          <p>Я Олександр, Frontend Developer з Києва.</p>
-          <p>Працюю з малим бізнесом та допомагаю створювати прості та зрозумілі сайти, які зручно використовувати клієнтам.</p>
-          <p>Фокусуюсь на простих рішеннях, які дозволяють швидко запустити сайт та отримати перші заявки.</p>
+        <p class="contact__subtitle">
+          Залиште заявку або напишіть мені — відповім найближчим часом.
+        </p>
+
+        <div class="contact__links">
+          <a
+            href="https://t.me/zaitsev_oleksandr"
+            class="contact__link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>Telegram</span>
+            <strong>@zaitsev_oleksandr</strong>
+          </a>
+
+          <a
+            href="mailto:zaitsev.webdev@gmail.com"
+            class="contact__link"
+          >
+            <span>Email</span>
+            <strong>zaitsev.webdev@gmail.com</strong>
+          </a>
         </div>
       </div>
 
-      <div id="contacts" class="about-contact__block">
-        <div class="about-contact__block-form">
-
-
-        <h3 class="about-contact__form-title">Обговоримо ваш проєкт</h3>
-        <p class="about-contact__form-subtitle">Залиште заявку або напишіть мені — відповім найближчим часом</p>
-
-        <form
-            action="https://formspree.io/f/xgojznav"
-            method="POST"
-            class="about-contact__form"
+      <form
+        class="contact__form"
+        action="https://formspree.io/f/xgojznav"
+        method="POST"
+      >
+        <input
+          type="hidden"
+          name="_subject"
+          value="Нова заявка із сайту Zaitsev.dev"
         >
-          <div class="about-contact__field">
-            <label for="name" class="about-contact__label">Ім’я</label>
+
+        <div class="contact__fields">
+          <div class="contact__field">
+            <label
+              for="name"
+              class="contact__label"
+            >
+              Ім’я
+            </label>
+
             <input
-                id="name"
-                name="name"
-                v-model="formData.name"
-                type="text"
-                required
-                class="about-contact__input"
-            />
+              id="name"
+              v-model.trim="formData.name"
+              class="contact__input"
+              type="text"
+              name="name"
+              placeholder="Олександр"
+              minlength="2"
+              autocomplete="name"
+              required
+            >
           </div>
 
-          <div class="about-contact__field">
-            <label for="contact" class="about-contact__label">Контакт (Telegram / телефон)</label>
+          <div class="contact__field">
+            <label
+              for="contact"
+              class="contact__label"
+            >
+              Telegram або телефон
+            </label>
+
             <input
-                id="contact"
-                name="contact"
-                v-model="formData.contact"
-                type="text"
-                required
-                class="about-contact__input"
-            />
+              id="contact"
+              v-model.trim="formData.contact"
+              class="contact__input"
+              type="text"
+              name="contact"
+              placeholder="@username або +380..."
+              autocomplete="tel"
+              required
+            >
           </div>
+        </div>
 
-          <div class="about-contact__field">
-            <label for="message" class="about-contact__label">Коротко про задачу</label>
-            <textarea
-                id="message"
-                name="message"
-                v-model="formData.message"
-                required
-                class="about-contact__textarea"
-            ></textarea>
-          </div>
+        <div class="contact__field">
+          <label
+            for="message"
+            class="contact__label"
+          >
+            Повідомлення
+          </label>
 
-          <button type="submit" class="about-contact__submit-btn">
+          <textarea
+            id="message"
+            v-model.trim="formData.message"
+            class="contact__textarea"
+            name="message"
+            placeholder="Коротко розкажіть про задачу, терміни та бажаний результат"
+            minlength="10"
+            required
+          />
+        </div>
+
+        <div class="contact__form-footer">
+          <button
+            type="submit"
+            class="contact__submit"
+          >
             Надіслати заявку
           </button>
 
-          <p class="about-contact__direct-link">
-            Або напишіть одразу:<br />
-            <a href="https://t.me/zaitsev_oleksandr" target="_blank">Telegram: @zaitsev_oleksandr</a>
-          </p>
-        </form>
+          <span class="contact__note">
+            Відповім найближчим часом
+          </span>
         </div>
-      </div>
-
+      </form>
     </div>
   </section>
 </template>
 
-<script setup>
-  const formData = reactive({
-    name: '',
-    contact: '',
-    message: ''
-  })
+<script setup lang="ts">
+interface FormData {
+  name: string
+  contact: string
+  message: string
+}
+
+const formData = reactive<FormData>({
+  name: '',
+  contact: '',
+  message: ''
+})
 </script>
 
 <style lang="scss">
-  .about-contact {
-    padding-top: 60px;
-    padding-bottom: 60px;
-    background-color: #121212;
+.contact {
+  padding: 72px 0;
+  background-color: $primary-bg;
+  border-bottom: 1px solid rgba($text-light, 0.1);
+
+  @include breakpoint($tablet) {
+    padding: 88px 0;
+  }
+
+  @include breakpoint($tabletLandscape) {
+    padding: 96px 0 108px;
+  }
+
+  &__container {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+
+    @include breakpoint($tablet) {
+      padding-right: 32px;
+      padding-left: 32px;
+    }
 
     @include breakpoint($tabletLandscape) {
-      padding-top: 100px;
-      padding-bottom: 100px;
+      grid-template-columns: minmax(300px, 0.75fr) minmax(0, 1.1fr);
+      align-items: start;
+      gap: 64px;
     }
 
-    &__container {
-      width: 100%;
-      max-width: 1440px;
-      margin: 0 auto;
-      padding-left: 24px;
-      padding-right: 24px;
-      box-sizing: border-box;
-      @include flex(flex-start, flex-start);
-      flex-direction: column;
-      gap: 60px;
+    @include breakpoint($laptop) {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
 
-      @include breakpoint($tabletLandscape) {
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 48px;
-      }
+  &__info {
+    min-width: 0;
+  }
+
+  &__title {
+    max-width: 440px;
+    margin: 0 0 20px;
+    letter-spacing: -1.8px;
+
+    @include font(
+      42px,
+      1.04,
+      $mainFontName,
+      $text-light,
+      700
+    );
+
+    @include breakpoint($tablet) {
+      font-size: 48px;
+    }
+  }
+
+  &__subtitle {
+    max-width: 400px;
+    margin: 0;
+
+    @include font(
+      16px,
+      1.6,
+      $mainFontName,
+      $text-muted,
+      400
+    );
+  }
+
+  &__links {
+    margin-top: 40px;
+    overflow: hidden;
+    border: 1px solid rgba($text-light, 0.15);
+    border-radius: 14px;
+
+    @include breakpoint($tabletLandscape) {
+      margin-top: 42px;
+    }
+  }
+
+  &__link {
+    min-height: 58px;
+    padding: 0 20px;
+    gap: 20px;
+    text-decoration: none;
+    transition: background-color 0.25s ease;
+
+    @include flex(space-between, center);
+
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba($text-light, 0.12);
     }
 
-    &__info {
-      width: 100%;
-
-      @include breakpoint($tabletLandscape) {
-        flex: 1;
-        max-width: 568px;
-      }
+    &:hover {
+      background-color: rgba($card-bg, 0.25);
     }
 
-    &__title {
-      @include font(28px, 1.2, $mainFontName, #E0E0E0, 600);
-      margin: 0 0 24px 0;
+    span {
+      text-transform: uppercase;
+      letter-spacing: 3px;
 
-      @include breakpoint($tabletLandscape) {
-        font-size: 36px;
-      }
+      @include font(
+        10px,
+        1.2,
+        monospace,
+        $text-muted,
+        500
+      );
     }
 
-    &__bio {
-      @include font(18px, 1.2, $mainFontName, #FFFFFF, 400);
-      @include flex(flex-start, flex-start);
+    strong {
+      overflow-wrap: anywhere;
+      text-align: right;
 
-      flex-direction: column;
-      gap: 20px;
+      @include font(
+        13px,
+        1.3,
+        $mainFontName,
+        $text-light,
+        400
+      );
 
-      p {
-        margin: 0;
-      }
-
-      @include breakpoint($tabletLandscape) {
-        font-size: 24px;
-      }
-    }
-
-    &__block {
-      width: 100%;
-
-      @include breakpoint($tabletLandscape) {
-        flex: 1;
-        @include flex(center, center);
-      }
-    }
-
-    &__block-form {
-      width: 100%;
-      max-width: 450px;
-      margin: 0 auto;
-      background: #2A2A2A;
-      border-radius: 12px;
-      padding: 24px;
-      box-sizing: border-box;
-      @include flex(flex-start, flex-start);
-      flex-direction: column;
-      gap: 9px;
-
-      @include breakpoint($tabletLandscape) {
-        width: 450px;
-        max-width: none;
-        margin: 0;
-      }
-    }
-
-    &__form-title {
-      @include font(24px, 1.2, $mainFontName, #E0E0E0, 600);
-      margin: 0;
-    }
-
-    &__form-subtitle {
-      @include font(16px, 1.2, $mainFontName, #AFAFAF, 600);
-      margin: 0 0 10px 0;
-    }
-
-    &__form {
-      width: 100%;
-      @include flex(flex-start, flex-start);
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    &__field {
-      width: 100%;
-      @include flex(flex-start, flex-start);
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    &__label {
-      @include font(14px, 1.2, $mainFontName, #E0E0E0, 500);
-    }
-
-    &__input {
-      width: 100%;
-      height: 50px;
-      background: #FFFFFF;
-      border-radius: 8px;
-      border: none;
-      padding: 0 16px;
-      box-sizing: border-box;
-      @include font(16px, 1.2, $mainFontName, #121212, 500);
-      outline: none;
-
-      &:focus {
-        box-shadow: 0px 0px 0px 2px #2EC4B6;
-      }
-    }
-
-    &__textarea {
-      width: 100%;
-      height: 100px;
-      background: #FFFFFF;
-      border-radius: 8px;
-      border: none;
-      padding: 12px 16px;
-      box-sizing: border-box;
-      @include font(16px, 1.2, $mainFontName, #121212, 500);
-      resize: none;
-      outline: none;
-
-      &:focus {
-        box-shadow: 0px 0px 0px 2px #2EC4B6;
-      }
-    }
-
-    &__submit-btn {
-      width: 100%;
-      height: 50px;
-      background: #2EC4B6;
-      border-radius: 8px;
-      border: 1px solid #2EC4B6;
-      @include flexCenter();
-      @include font(14px, 1.2, $mainFontName, #121212, 600);
-      cursor: pointer;
-      transition: all 0.25s ease;
-      margin-top: 10px;
-
-      &:hover {
-        background: transparent;
-        color: #2EC4B6;
-      }
-    }
-
-    &__direct-link {
-      @include font(14px, 1.2, $mainFontName, #AFAFAF, 600);
-      margin: 8px 0 0 0;
-
-      a {
-        color: #2EC4B6;
-        text-decoration: none;
-
-        &:hover {
-          text-decoration: underline;
-        }
+      @include breakpoint($mobile) {
+        font-size: 14px;
       }
     }
   }
+
+  &__form {
+    width: 100%;
+    padding: 28px 20px;
+    background-color: rgba($card-bg, 0.12);
+    border: 1px solid rgba($text-light, 0.15);
+    border-radius: 16px;
+    box-sizing: border-box;
+
+    @include breakpoint($mobile) {
+      padding: 30px;
+    }
+
+    @include breakpoint($tabletLandscape) {
+      padding: 36px;
+    }
+  }
+
+  &__fields {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-bottom: 26px;
+
+    @include breakpoint($tablet) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+  }
+
+  &__field {
+    width: 100%;
+    min-width: 0;
+
+    &:not(:last-child) {
+      margin-bottom: 26px;
+    }
+  }
+
+  &__fields &__field {
+    margin-bottom: 0;
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 10px;
+
+    @include font(
+      13px,
+      1.3,
+      $mainFontName,
+      $text-muted,
+      400
+    );
+  }
+
+  &__input,
+  &__textarea {
+    width: 100%;
+    color: $text-light;
+    background-color: rgba($primary-bg, 0.35);
+    border: 1px solid rgba($text-light, 0.16);
+    border-radius: 10px;
+    outline: none;
+    box-sizing: border-box;
+    transition:
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+
+    @include font(
+      15px,
+      1.5,
+      $mainFontName,
+      $text-light,
+      400
+    );
+
+    &::placeholder {
+      color: rgba($text-muted, 0.7);
+    }
+
+    &:hover {
+      border-color: rgba($text-light, 0.28);
+    }
+
+    &:focus {
+      border-color: $color-accent;
+      box-shadow: 0 0 0 3px rgba($color-accent, 0.08);
+    }
+  }
+
+  &__input {
+    height: 50px;
+    padding: 0 16px;
+  }
+
+  &__textarea {
+    min-height: 220px;
+    padding: 14px 16px;
+    resize: vertical;
+
+    @include breakpoint($tabletLandscape) {
+      min-height: 310px;
+    }
+  }
+
+  &__form-footer {
+    gap: 24px;
+    @include flex(space-between, center);
+    flex-wrap: wrap;
+  }
+
+  &__submit {
+    min-height: 48px;
+    padding: 0 26px;
+    color: $primary-bg;
+    background-color: $color-accent;
+    border: 1px solid $color-accent;
+    border-radius: 999px;
+    cursor: pointer;
+    transition:
+      color 0.25s ease,
+      background-color 0.25s ease,
+      transform 0.25s ease;
+
+    @include font(
+      14px,
+      1.2,
+      $mainFontName,
+      $primary-bg,
+      600
+    );
+
+    &:hover {
+      color: $color-accent;
+      background-color: transparent;
+      transform: translateY(-2px);
+    }
+  }
+
+  &__note {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+    @include font(
+      9px,
+      1.4,
+      monospace,
+      $text-muted,
+      500
+    );
+  }
+}
 </style>
