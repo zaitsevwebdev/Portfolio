@@ -1,28 +1,44 @@
+<script setup lang="ts">
+import { projects } from '~/data/projects'
+
+const featuredProjects = projects
+  .filter(project => project.featured)
+  .slice(0, 3)
+</script>
+
 <template>
-  <section id="projects" class="portfolio">
+  <section
+    id="projects"
+    class="portfolio"
+  >
     <div class="portfolio__container">
       <div class="portfolio__header">
         <h2 class="portfolio__title">
-          Мої роботи
+          Обрані проєкти
         </h2>
 
         <p class="portfolio__subtitle">
-          Три кейси, що показують підхід до структури,
-          типографіки та інтерфейсу.
+          Три проєкти, що демонструють мій підхід до дизайну,
+          структури, адаптивності та розробки інтерфейсів.
         </p>
       </div>
 
       <div class="portfolio__list">
         <article
-          v-for="project in projects"
-          :key="project.index"
+          v-for="(project, index) in featuredProjects"
+          :key="project.id"
           class="portfolio__project"
           :class="{
-            'portfolio__project--reverse':
-              Number(project.index) % 2 === 0
+            'portfolio__project--reverse': (index + 1) % 2 === 0
           }"
         >
-          <div class="portfolio__preview">
+          <a
+            :href="project.demoUrl"
+            class="portfolio__preview"
+            target="_blank"
+            rel="noopener noreferrer"
+            :aria-label="`Переглянути проєкт ${project.title}`"
+          >
             <div class="portfolio__browser">
               <div class="portfolio__browser-header">
                 <div class="portfolio__browser-dots">
@@ -36,30 +52,37 @@
                 </span>
               </div>
 
-              <component :is="mockups[project.mockup]" />
+              <div class="portfolio__image-wrapper">
+                <img
+                  :src="project.image"
+                  :alt="`${project.title} — ${project.type}`"
+                  class="portfolio__image"
+                  loading="lazy"
+                >
+              </div>
             </div>
-          </div>
+          </a>
 
           <div class="portfolio__info">
             <span class="portfolio__index">
-              {{ project.index }}
+              {{ String(index + 1).padStart(2, '0') }}
             </span>
-
-            <h3 class="portfolio__project-title">
-              {{ project.title }}
-            </h3>
 
             <p class="portfolio__type">
               {{ project.type }}
             </p>
 
+            <h3 class="portfolio__project-title">
+              {{ project.title }}
+            </h3>
+
             <p class="portfolio__description">
               {{ project.description }}
             </p>
 
-            <ul class="portfolio__tech-list">
+            <ul class="portfolio__technologies">
               <li
-                v-for="technology in project.tech"
+                v-for="technology in project.technologies"
                 :key="technology"
               >
                 {{ technology }}
@@ -69,7 +92,7 @@
             <div class="portfolio__actions">
               <a
                 :href="project.demoUrl"
-                class="portfolio__button"
+                class="portfolio__button portfolio__button--primary"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -88,80 +111,23 @@
           </div>
         </article>
       </div>
+
+      <div class="portfolio__more">
+        <NuxtLink
+          to="/projects"
+          class="portfolio__button portfolio__button--more"
+        >
+          Переглянути всі проєкти
+        </NuxtLink>
+      </div>
     </div>
   </section>
 </template>
 
-<script setup lang="ts">
-import CafeMockup from '~/components/ui/mockup/CafeMockup.vue'
-import BarberMockup from '~/components/ui/mockup/BarberMockup.vue'
-import ServiceMockup from '~/components/ui/mockup/ServiceMockup.vue'
-
-const mockups = {
-  cafe: CafeMockup,
-  barber: BarberMockup,
-  service: ServiceMockup
-} as const
-
-type MockupName = keyof typeof mockups
-
-interface Project {
-  index: string
-  title: string
-  type: string
-  description: string
-  tech: string[]
-  mockup: MockupName
-  domain: string
-  demoUrl: string
-  githubUrl: string
-}
-
-const projects: Project[] = [
-  {
-    index: '01',
-    title: 'Сайт для кав’ярні',
-    type: 'Лендинг • Меню • Локації',
-    description:
-      'Односторінковий сайт з меню, атмосферою закладу та контактами. Акцент на швидкому перегляді позицій з телефона й простому шляху до візиту.',
-    tech: ['Vue.js', 'SCSS', 'Адаптивна верстка'],
-    mockup: 'cafe',
-    domain: 'coffee-shop.local',
-    demoUrl: '#',
-    githubUrl: '#'
-  },
-  {
-    index: '02',
-    title: 'Сайт для барбершопу (концепт)',
-    type: 'Концепт • Послуги • Запис',
-    description:
-      'Концепт сайту з прайсом, майстрами та формою запису. Стриманий інтерфейс, у якому головне — ціна, послуга й кнопка запису.',
-    tech: ['Nuxt 3', 'TypeScript', 'Форми'],
-    mockup: 'barber',
-    domain: 'barbershop.concept',
-    demoUrl: '#',
-    githubUrl: '#'
-  },
-  {
-    index: '03',
-    title: 'Сайт для сервісу',
-    type: 'Сервіс • Тарифи • Заявки',
-    description:
-      'Сайт сервісної компанії зі структурою послуг, тарифами та інтеграцією форм заявок через API.',
-    tech: ['Vue.js', 'TypeScript', 'API'],
-    mockup: 'service',
-    domain: 'service.app',
-    demoUrl: '#',
-    githubUrl: '#'
-  }
-]
-</script>
-
-<style lang="scss">
+<style scoped lang="scss">
 .portfolio {
   padding: 72px 0;
   background-color: $primary-bg;
-  border-bottom: 1px solid rgba($text-light, 0.1);
 
   @include breakpoint($tablet) {
     padding: 88px 0;
@@ -175,7 +141,8 @@ const projects: Project[] = [
     width: 100%;
     max-width: 1180px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding-right: 20px;
+    padding-left: 20px;
     box-sizing: border-box;
 
     @include breakpoint($tablet) {
@@ -193,6 +160,7 @@ const projects: Project[] = [
     margin-bottom: 56px;
     gap: 24px;
     flex-direction: column;
+
     @include flex(space-between, flex-start);
 
     @include breakpoint($tablet) {
@@ -208,7 +176,14 @@ const projects: Project[] = [
   &__title {
     margin: 0;
     letter-spacing: -1.5px;
-    @include font(38px, 1.1, $mainFontName, $text-light, 700);
+
+    @include font(
+      38px,
+      1.1,
+      $mainFontName,
+      $text-light,
+      700
+    );
 
     @include breakpoint($tablet) {
       font-size: 48px;
@@ -216,14 +191,26 @@ const projects: Project[] = [
   }
 
   &__subtitle {
-    max-width: 310px;
+    max-width: 420px;
     margin: 0;
-    @include font(14px, 1.6, $mainFontName, $text-muted, 400);
+
+    @include font(
+      14px,
+      1.6,
+      $mainFontName,
+      $text-muted,
+      400
+    );
+
+    @include breakpoint($tablet) {
+      font-size: 15px;
+    }
   }
 
   &__list {
     gap: 80px;
     flex-direction: column;
+
     @include flex(flex-start, stretch);
 
     @include breakpoint($tabletLandscape) {
@@ -233,7 +220,7 @@ const projects: Project[] = [
 
   &__project {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     align-items: center;
     gap: 38px;
 
@@ -270,14 +257,28 @@ const projects: Project[] = [
   }
 
   &__preview {
+    display: block;
     min-width: 0;
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      .portfolio__image {
+        transform: scale(1.02);
+      }
+
+      .portfolio__browser {
+        border-color: rgba($color-accent, 0.45);
+      }
+    }
   }
 
   &__browser {
     overflow: hidden;
-    background-color: $primary-bg;
+    background-color: $card-bg;
     border: 1px solid rgba($text-light, 0.16);
     border-radius: 14px;
+    transition: border-color 0.25s ease;
   }
 
   &__browser-header {
@@ -287,15 +288,19 @@ const projects: Project[] = [
     background-color: rgba($card-bg, 0.36);
     border-bottom: 1px solid rgba($text-light, 0.12);
     box-sizing: border-box;
+
     @include flex(flex-start, center);
 
     @include breakpoint($tablet) {
-      padding: 0 20px;
+      padding-right: 20px;
+      padding-left: 20px;
     }
   }
 
   &__browser-dots {
+    flex-shrink: 0;
     gap: 7px;
+
     @include flex(flex-start, center);
 
     span {
@@ -304,13 +309,42 @@ const projects: Project[] = [
       background-color: rgba($text-light, 0.2);
       border-radius: 50%;
     }
+
+    span:last-child {
+      background-color: rgba($color-accent, 0.75);
+    }
   }
 
   &__browser-domain {
+    overflow: hidden;
     padding: 6px 12px;
     border: 1px solid rgba($text-light, 0.13);
     border-radius: 999px;
-    @include font(10px, 1, monospace, $text-muted, 400);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @include font(
+      10px,
+      1,
+      monospace,
+      $text-muted,
+      400
+    );
+  }
+
+  &__image-wrapper {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: transform 0.4s ease;
   }
 
   &__info {
@@ -321,49 +355,87 @@ const projects: Project[] = [
     display: block;
     margin-bottom: 22px;
     letter-spacing: 2px;
-    @include font(11px, 1, monospace, $color-accent, 500);
+
+    @include font(
+      11px,
+      1,
+      monospace,
+      $color-accent,
+      500
+    );
+  }
+
+  &__type {
+    margin: 0 0 10px;
+
+    @include font(
+      14px,
+      1.4,
+      $mainFontName,
+      $text-muted,
+      400
+    );
   }
 
   &__project-title {
-    margin: 0 0 10px;
+    margin: 0 0 16px;
     letter-spacing: -0.7px;
-    @include font(28px, 1.2, $mainFontName, $text-light, 700);
+
+    @include font(
+      28px,
+      1.2,
+      $mainFontName,
+      $text-light,
+      700
+    );
 
     @include breakpoint($tablet) {
       font-size: 30px;
     }
   }
 
-  &__type {
-    margin: 0 0 24px;
-    @include font(14px, 1.4, $mainFontName, $text-muted, 400);
-  }
-
   &__description {
     max-width: 470px;
     margin: 0 0 24px;
-    @include font(16px, 1.6, $mainFontName, $text-muted, 400);
+
+    @include font(
+      16px,
+      1.6,
+      $mainFontName,
+      $text-muted,
+      400
+    );
   }
 
-  &__tech-list {
+  &__technologies {
     margin: 0 0 32px;
     padding: 0;
     gap: 8px;
     list-style: none;
     flex-wrap: wrap;
+
     @include flex(flex-start, center);
 
     li {
       padding: 8px 12px;
-      border: 1px solid rgba($text-light, 0.14);
+      border: 1px solid rgba($text-light, 0.16);
       border-radius: 999px;
-      @include font(11px, 1, monospace, $text-muted, 400);
+      white-space: nowrap;
+
+      @include font(
+        11px,
+        1.2,
+        monospace,
+        $text-muted,
+        400
+      );
     }
   }
 
   &__actions {
     gap: 12px;
     flex-wrap: wrap;
+
     @include flex(flex-start, center);
   }
 
@@ -372,19 +444,59 @@ const projects: Project[] = [
     padding: 0 20px;
     border: 1px solid rgba($text-light, 0.16);
     border-radius: 999px;
+    box-sizing: border-box;
     text-decoration: none;
     transition:
       color 0.25s ease,
       border-color 0.25s ease,
       background-color 0.25s ease;
 
-    @include flex(center, center);
-    @include font(13px, 1.2, $mainFontName, $text-muted, 400);
+    @include flexCenter();
+
+    @include font(
+      13px,
+      1.2,
+      $mainFontName,
+      $text-muted,
+      500
+    );
 
     &:hover {
+      color: $color-accent;
+      border-color: $color-accent;
+    }
+
+    &--primary {
       color: $primary-bg;
       background-color: $color-accent;
       border-color: $color-accent;
+
+      &:hover {
+        color: $color-accent;
+        background-color: transparent;
+      }
+    }
+
+    &--more {
+      min-height: 50px;
+      padding-right: 26px;
+      padding-left: 26px;
+    }
+  }
+
+  &__more {
+    margin-top: 56px;
+
+    @include flex(flex-start, center);
+
+    @include breakpoint($tablet) {
+      margin-top: 72px;
+    }
+
+    @include breakpoint($tabletLandscape) {
+      margin-top: 88px;
+
+      @include flexCenter();
     }
   }
 }

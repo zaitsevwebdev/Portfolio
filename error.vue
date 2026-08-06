@@ -1,4 +1,3 @@
-<!-- error.vue -->
 <template>
   <div class="error-page">
     <div class="error-page__content">
@@ -15,12 +14,10 @@
 </template>
 
 <script setup>
-// Отримуємо об'єкт помилки (опціонально, якщо знадобиться логування)
 defineProps({
   error: Object
 })
 
-// Вбудована функція Nuxt 3 для безпечного очищення помилки та редіректу
 const handleClearError = () => {
   clearError({ redirect: '/' })
 }
