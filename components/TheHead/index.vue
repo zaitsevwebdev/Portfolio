@@ -2,7 +2,7 @@
   <header class="header">
     <div class="header__container">
       <a
-        href="#main"
+        href="/"
         class="header__logo"
         @click="closeMenu"
       >
@@ -70,7 +70,7 @@
       </nav>
 
       <a
-        href="#contacts"
+        href="/#contacts"
         class="header__mobile-button"
         @click="closeMenu"
       >
@@ -89,10 +89,10 @@ interface Block {
 }
 
 const blocks: Block[] = [
-  { name: 'Головна', link: '#main' },
-  { name: 'Проєкти', link: '#projects' },
-  { name: 'Про мене', link: '#about' },
-  { name: 'Контакти', link: '#contacts' }
+  { name: 'Головна', link: '/#main' },
+  { name: 'Проєкти', link: '/#projects' },
+  { name: 'Про мене', link: '/#about' },
+  { name: 'Контакти', link: '/#contacts' }
 ]
 
 const isMenuOpen = ref(false)
@@ -286,13 +286,16 @@ onUnmounted(() => {
     &--active {
       span {
         position: absolute;
+        display: none;
 
         &:first-child {
           transform: rotate(45deg);
+          display: block;
         }
 
         &:last-child {
           transform: rotate(-45deg);
+          display: block;
         }
       }
     }

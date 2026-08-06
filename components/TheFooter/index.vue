@@ -4,7 +4,7 @@
       <div class="footer__main">
         <div class="footer__brand">
           <a
-            href="#main"
+            href="/"
             class="footer__logo"
           >
             Zaitsev<span>.webdev</span>
@@ -26,25 +26,25 @@
 
           <ul class="footer__links">
             <li>
-              <a href="#main" class="footer__link">
+              <a href="/#main" class="footer__link">
                 Головна
               </a>
             </li>
 
             <li>
-              <a href="#projects" class="footer__link">
+              <a href="/#projects" class="footer__link">
                 Проєкти
               </a>
             </li>
 
             <li>
-              <a href="#about" class="footer__link">
+              <a href="/#about" class="footer__link">
                 Про мене
               </a>
             </li>
 
             <li>
-              <a href="#contacts" class="footer__link">
+              <a href="/#contacts" class="footer__link">
                 Контакти
               </a>
             </li>
