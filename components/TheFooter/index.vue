@@ -38,6 +38,12 @@
             </li>
 
             <li>
+              <a href="/#services" class="footer__link">
+                Послуги
+              </a>
+            </li>
+
+            <li>
               <a href="/#about" class="footer__link">
                 Про мене
               </a>

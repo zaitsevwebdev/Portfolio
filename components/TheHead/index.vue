@@ -90,7 +90,8 @@ interface Block {
 
 const blocks: Block[] = [
   { name: 'Головна', link: '/#main' },
-  { name: 'Проєкти', link: '/#projects' },
+  { name: 'Проєкти', link: '/projects' },
+  { name: 'Послуги', link: '/services' },
   { name: 'Про мене', link: '/#about' },
   { name: 'Контакти', link: '/#contacts' }
 ]
