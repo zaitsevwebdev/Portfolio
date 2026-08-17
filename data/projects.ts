@@ -27,6 +27,20 @@ export const projects: Project[] = [
   },
   {
     id: 2,
+    slug: 'sich',
+    title: 'SICH',
+    type: 'Лендинг для барбершопу',
+    description:
+      'Сміливий лендинг барбершопу з авторською назвою, візуальною концепцією та дизайном. Темна палітра, червоний акцент і виразна типографіка формують характер бренду та підкреслюють його сучасний стиль.',
+    image: '/images/sich.png',
+    technologies: ['Nuxt 3', 'Vue 3', 'TypeScript', 'SCSS'],
+    demoUrl: 'https://sich-steel.vercel.app/',
+    githubUrl: 'https://github.com/zaitsevwebdev/sich',
+    isOriginalDesign: true,
+    featured: true
+  },
+  {
+    id: 3,
     slug: 'casaroma',
     title: 'CasaRoma',
     type: 'Сайт італійського ресторану',
@@ -40,7 +54,7 @@ export const projects: Project[] = [
     featured: true
   },
   {
-    id: 3,
+    id: 4,
     slug: 'nord',
     title: 'Nord',
     type: 'Міні-магазин техніки',
@@ -53,7 +67,7 @@ export const projects: Project[] = [
     isOriginalDesign: true
   },
   {
-    id: 4,
+    id: 5,
     slug: 'petshop',
     title: 'PetShop',
     type: 'Лендинг для зоосервісу',
@@ -67,7 +81,7 @@ export const projects: Project[] = [
     featured: true
   },
   {
-    id: 5,
+    id: 6,
     slug: 'serene',
     title: 'Serene',
     type: 'Багатосторінковий e-commerce',
@@ -79,18 +93,4 @@ export const projects: Project[] = [
     githubUrl: 'https://github.com/zaitsevwebdev/SERENE',
     isOriginalDesign: true,
   },
-  {
-    id: 6,
-    slug: 'sich',
-    title: 'SICH',
-    type: 'Лендинг для барбершопу',
-    description:
-      'Сміливий лендинг барбершопу з авторською назвою, візуальною концепцією та дизайном. Темна палітра, червоний акцент і виразна типографіка формують характер бренду та підкреслюють його сучасний стиль.',
-    image: '/images/sich.png',
-    technologies: ['Nuxt 3', 'Vue 3', 'TypeScript', 'SCSS'],
-    demoUrl: 'https://sich-steel.vercel.app/',
-    githubUrl: 'https://github.com/zaitsevwebdev/sich',
-    isOriginalDesign: true,
-    featured: true
-  }
 ]

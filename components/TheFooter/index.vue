@@ -11,8 +11,7 @@
           </a>
 
           <p class="footer__description">
-            Прості та зрозумілі сайти для малого бізнесу —
-            від структури до запуску.
+            Сайти, які не соромно показувати клієнтам - і які викликають довіру.
           </p>
         </div>
 
@@ -83,9 +82,23 @@
       </div>
 
       <div class="footer__bottom">
-        <p>
-          © {{ currentYear }} Олександр Зайцев
-        </p>
+        <div class="footer__bottom-container">
+          <span>
+            © {{ currentYear }} Олександр Зайцев
+          </span>
+
+          <span class="footer__bottom-dot" />
+
+          <span>
+            Твій бізнес заслуговує на хороший сайт.
+          </span>
+
+          <span class="footer__bottom-dot" />
+
+          <span>
+            Kyiv, Ukraine
+          </span>
+        </div>
       </div>
     </div>
   </footer>
@@ -234,35 +247,48 @@ const currentYear = new Date().getFullYear()
   }
 
   &__bottom {
-    width: 100%;
     border-top: 1px solid rgba($text-light, 0.1);
+  }
 
-    p {
-      width: 100%;
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 24px 20px;
-      box-sizing: border-box;
-      letter-spacing: 0.4px;
+  &__bottom-container {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 10px;
+    box-sizing: border-box;
+    flex-wrap: wrap;
 
-      @include font(
-        11px,
-        1.3,
-        monospace,
-        $text-muted,
-        400
-      );
+    @include flex(start, center);
 
-      @include breakpoint($tablet) {
-        padding-right: 32px;
-        padding-left: 32px;
-      }
+    @include font(
+      11px,
+      1.4,
+      $mainFontName,
+      $text-muted,
+      400
+    );
 
-      @include breakpoint($laptop) {
-        padding-right: 0;
-        padding-left: 0;
-      }
+    @include breakpoint($tablet) {
+      padding: 20px 32px;
+      gap: 14px;
+
+      font-size: 12px;
     }
+
+    @include breakpoint($laptop) {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+
+  &__bottom-dot {
+    width: 3px;
+    height: 3px;
+    flex-shrink: 0;
+
+    background-color: $color-accent;
+    border-radius: 50%;
   }
 }
 </style>

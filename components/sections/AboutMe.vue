@@ -2,9 +2,26 @@
   <section id="about" class="about">
     <div class="about__container">
       <div class="about__heading">
-        <span class="about__eyebrow">
-          Про мене
-        </span>
+        <div class="about__eyebrow">
+          <svg
+            class="about__eyebrow-icon"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M9 1.5C9 5.64 12.36 9 16.5 9C12.36 9 9 12.36 9 16.5C9 12.36 5.64 9 1.5 9C5.64 9 9 5.64 9 1.5Z"
+              stroke="currentColor"
+              stroke-width="1.2"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <span>Трохи про мене</span>
+        </div>
 
         <h2 class="about__title">
           Олександр Зайцев
@@ -17,12 +34,20 @@
 
       <div class="about__content">
         <p class="about__description">
-          Я Олександр, Frontend Developer з Києва. Розробляю прості
-          та зрозумілі сайти для малого бізнесу. Допомагаю
-          <strong>
-            швидко запустити проєкт, презентувати послуги та
-            отримувати перші заявки.
-          </strong>
+          Я хочу допомагати малому бізнесу
+          <span class="about__description-highlight">
+            створювати своє місце в інтернеті
+          </span>
+          — сучасне, зрозуміле та таке, що викликає довіру.
+
+          <span class="about__description-accent">
+            Створюю сайти, які не соромно показувати клієнтам —
+            зрозумілі, сучасні та без зайвого.
+          </span>
+
+          <span class="about__description-bottom">
+            Ти займаєшся бізнесом — я подбаю про те, як він виглядає онлайн.
+          </span>
         </p>
 
         <div class="about__stack">
@@ -103,31 +128,35 @@ const technologies: string[] = [
   }
 
   &__eyebrow {
-    display: block;
-    margin-bottom: 22px;
+    width: fit-content;
+    margin-bottom: 28px;
+    gap: 10px;
     text-transform: uppercase;
-    letter-spacing: 4px;
+    letter-spacing: 3.2px;
+    transform: rotate(2deg);
+    transform-origin: left center;
 
-    @include font(
-      10px,
-      1.3,
-      monospace,
-      $color-accent,
-      500
-    );
+    @include flex(flex-start, center);
+    @include font(11px, 1.3, $mainFontName, $color-accent, 600);
+
+    @include breakpoint($tablet) {
+      margin-bottom: 30px;
+      font-size: 12px;
+    }
+  }
+
+  &__eyebrow-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: $color-accent;
   }
 
   &__title {
     margin: 0 0 16px;
     letter-spacing: -1px;
 
-    @include font(
-      34px,
-      1.1,
-      $mainFontName,
-      $text-light,
-      700
-    );
+    @include font(34px, 1.1, $mainFontName, $text-light, 700);
 
     @include breakpoint($tablet) {
       font-size: 38px;
@@ -137,13 +166,7 @@ const technologies: string[] = [
   &__position {
     margin: 0;
 
-    @include font(
-      14px,
-      1.4,
-      $mainFontName,
-      $text-muted,
-      400
-    );
+    @include font(14px, 1.4, $mainFontName, $text-muted, 400);
   }
 
   &__content {
@@ -153,21 +176,39 @@ const technologies: string[] = [
   &__description {
     max-width: 680px;
     margin: 0;
+    letter-spacing: -0.2px;
 
-    @include font(
-      22px,
-      1.6,
-      $mainFontName,
-      $text-light,
-      400
-    );
+    @include font(19px, 1.7, $mainFontName, $text-muted, 400);
 
     @include breakpoint($tablet) {
-      font-size: 24px;
+      font-size: 21px;
     }
+  }
 
-    strong {
-      font-weight: 700;
+  &__description-highlight {
+    color: $text-light;
+    font-weight: 500;
+  }
+
+  &__description-accent {
+    display: block;
+    margin-top: 22px;
+
+    @include font(20px, 1.55, $mainFontName, $color-accent, 500);
+
+    @include breakpoint($tablet) {
+      font-size: 22px;
+    }
+  }
+
+  &__description-bottom {
+    display: block;
+    margin-top: 18px;
+
+    @include font(15px, 1.6, $mainFontName, $text-muted, 400);
+
+    @include breakpoint($tablet) {
+      font-size: 16px;
     }
   }
 
@@ -185,13 +226,7 @@ const technologies: string[] = [
     text-transform: uppercase;
     letter-spacing: 4px;
 
-    @include font(
-      10px,
-      1.3,
-      monospace,
-      $text-muted,
-      500
-    );
+    @include font(10px, 1.3, monospace, $text-muted, 500);
   }
 
   &__stack-list {
@@ -213,7 +248,7 @@ const technologies: string[] = [
     &::after {
       content: '';
       min-height: 52px;
-      background-color: rgba($text-light, 0.08);
+      background-color: $primary-bg;
     }
   }
 
@@ -225,14 +260,7 @@ const technologies: string[] = [
     box-sizing: border-box;
 
     @include flex(flex-start, center);
-
-    @include font(
-      14px,
-      1.3,
-      $mainFontName,
-      $text-light,
-      400
-    );
+    @include font(14px, 1.3, $mainFontName, $text-light, 400);
 
     &::before {
       content: '';

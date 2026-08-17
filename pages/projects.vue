@@ -2,12 +2,12 @@
 import { projects } from '~/data/projects'
 
 useHead({
-  title: 'Проєкти — Zaitsev.dev',
+  title: 'Проєкти - Zaitsev.dev',
   meta: [
     {
       name: 'description',
       content:
-        'Проєкти Олександра Зайцева — сайти на Vue, Nuxt 3 та TypeScript.'
+        'Проєкти Олександра Зайцева - сайти на Vue, Nuxt 3 та TypeScript.'
     }
   ]
 })
@@ -26,9 +26,28 @@ useHead({
 
         <div class="projects-page__heading">
           <div>
-            <span class="projects-page__eyebrow">
-              Portfolio
-            </span>
+            <div class="projects-page__eyebrow">
+              <svg
+                class="projects-page__eyebrow-icon"
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M9 1.5C9 5.64 12.36 9 16.5 9C12.36 9 9 12.36 9 16.5C9 12.36 5.64 9 1.5 9C5.64 9 9 5.64 9 1.5Z"
+                  stroke="currentColor"
+                  stroke-width="1.2"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <span>
+                Усі мої роботи
+              </span>
+            </div>
 
             <h1 class="projects-page__title">
               Мої проєкти
@@ -36,9 +55,8 @@ useHead({
           </div>
 
           <p class="projects-page__intro">
-            Сайти та концепти, створені для практики й малого бізнесу.
-            У кожному проєкті приділяю увагу структурі, адаптивності
-            та зрозумілому інтерфейсу.
+            Добірка сайтів і концептів, у яких я працюю зі структурою,
+            адаптивністю, деталями та зрозумілим інтерфейсом.
           </p>
         </div>
       </div>
@@ -60,8 +78,9 @@ useHead({
             >
               <img
                 :src="project.image"
-                :alt="`${project.title} — ${project.type}`"
+                :alt="`${project.title} - ${project.type}`"
                 class="projects-page__image"
+                loading="lazy"
               >
 
               <span class="projects-page__preview-link">
@@ -88,10 +107,10 @@ useHead({
 
               <ul class="projects-page__technologies">
                 <li
-                    v-for="technology in project.technologies"
-                    :key="technology"
+                  v-for="technology in project.technologies"
+                  :key="technology"
                 >
-                    {{ technology }}
+                  {{ technology }}
                 </li>
               </ul>
 
@@ -166,15 +185,11 @@ useHead({
     display: inline-block;
     margin-bottom: 64px;
     text-decoration: none;
-    transition: color 0.25s ease;
+    transition:
+      color 0.25s ease,
+      transform 0.25s ease;
 
-    @include font(
-      13px,
-      1.2,
-      $mainFontName,
-      $text-muted,
-      500
-    );
+    @include font(13px, 1.2, $mainFontName, $text-muted, 500);
 
     @include breakpoint($tablet) {
       margin-bottom: 88px;
@@ -182,6 +197,7 @@ useHead({
 
     &:hover {
       color: $color-accent;
+      transform: translateX(-3px);
     }
   }
 
@@ -198,31 +214,35 @@ useHead({
   }
 
   &__eyebrow {
-    display: block;
-    margin-bottom: 18px;
+    width: fit-content;
+    margin-bottom: 24px;
+    gap: 10px;
     text-transform: uppercase;
-    letter-spacing: 4px;
+    letter-spacing: 3.2px;
+    transform: rotate(2deg);
+    transform-origin: left center;
 
-    @include font(
-      10px,
-      1.3,
-      monospace,
-      $color-accent,
-      500
-    );
+    @include flex(flex-start, center);
+    @include font(11px, 1.3, $mainFontName, $color-accent, 600);
+
+    @include breakpoint($tablet) {
+      margin-bottom: 26px;
+      font-size: 12px;
+    }
+  }
+
+  &__eyebrow-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: $color-accent;
   }
 
   &__title {
     margin: 0;
     letter-spacing: -2px;
 
-    @include font(
-      44px,
-      1,
-      $mainFontName,
-      $text-light,
-      700
-    );
+    @include font(44px, 1, $mainFontName, $text-light, 700);
 
     @include breakpoint($tablet) {
       font-size: 64px;
@@ -233,13 +253,7 @@ useHead({
     max-width: 420px;
     margin: 0;
 
-    @include font(
-      15px,
-      1.65,
-      $mainFontName,
-      $text-muted,
-      400
-    );
+    @include font(15px, 1.65, $mainFontName, $text-muted, 400);
 
     @include breakpoint($tablet) {
       font-size: 16px;
@@ -274,7 +288,7 @@ useHead({
 
     @include breakpoint($laptopSmall) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 28px;
+      column-gap: 28px;
       row-gap: 80px;
     }
   }
@@ -323,6 +337,7 @@ useHead({
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top;
     transition: transform 0.4s ease;
   }
 
@@ -356,50 +371,26 @@ useHead({
     margin-bottom: 18px;
     letter-spacing: 2px;
 
-    @include font(
-      10px,
-      1,
-      monospace,
-      $color-accent,
-      500
-    );
+    @include font(10px, 1, monospace, $color-accent, 500);
   }
 
   &__type {
     margin: 0 0 10px;
 
-    @include font(
-      12px,
-      1.4,
-      $mainFontName,
-      $text-muted,
-      400
-    );
+    @include font(12px, 1.4, $mainFontName, $text-muted, 400);
   }
 
   &__card-title {
     margin: 0 0 16px;
     letter-spacing: -0.6px;
 
-    @include font(
-      24px,
-      1.2,
-      $mainFontName,
-      $text-light,
-      700
-    );
+    @include font(24px, 1.2, $mainFontName, $text-light, 700);
   }
 
   &__description {
     margin: 0;
 
-    @include font(
-      14px,
-      1.6,
-      $mainFontName,
-      $text-muted,
-      400
-    );
+    @include font(14px, 1.6, $mainFontName, $text-muted, 400);
   }
 
   &__technologies {
@@ -417,19 +408,14 @@ useHead({
       border-radius: 999px;
       white-space: nowrap;
 
-      @include font(
-        11px,
-        1.2,
-        monospace,
-        $text-muted,
-        400
-      );
+      @include font(11px, 1.2, monospace, $text-muted, 400);
     }
   }
 
   &__actions {
     gap: 10px;
     flex-wrap: wrap;
+
     @include flex(flex-start, center);
   }
 
@@ -442,21 +428,16 @@ useHead({
     transition:
       color 0.25s ease,
       background-color 0.25s ease,
-      border-color 0.25s ease;
+      border-color 0.25s ease,
+      transform 0.25s ease;
 
     @include flex(center, center);
-
-    @include font(
-      12px,
-      1.2,
-      $mainFontName,
-      $text-muted,
-      500
-    );
+    @include font(12px, 1.2, $mainFontName, $text-muted, 500);
 
     &:hover {
       color: $color-accent;
       border-color: $color-accent;
+      transform: translateY(-2px);
     }
 
     &--primary {

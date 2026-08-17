@@ -9,14 +9,16 @@
         </p>
 
         <h1 class="hero__title">
-          Створюю сайти, які
-          <span>зрозуміло</span>
-          розповідають про бізнес і допомагають отримувати клієнтів
+          Твій бізнес заслуговує на сайт,
+          яким хочеться <span>пишатися.</span>
         </h1>
 
         <p class="hero__description">
-          Проєктую та розробляю лаконічні сайти для малого бізнесу:
-          від структури й прототипу до адаптивної верстки, форм і запуску.
+          Я допомагаю малому бізнесу створювати своє місце в інтернеті —
+          не схоже на десятки інших, а справді своє.
+
+          Сайт, який зрозуміло показує твою цінність, викликає довіру
+          і який не соромно показувати клієнтам.
         </p>
 
         <div class="hero__actions">
@@ -26,6 +28,30 @@
           >
             Переглянути проєкти
           </a>
+
+          <NuxtLink
+            to="/services"
+            class="hero__button hero__button--secondary"
+          >
+            Дивитися ціни
+
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 12L12 4M12 4H6M12 4V10"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </NuxtLink>
 
           <a
             href="#contacts"
@@ -45,7 +71,9 @@
               <span />
             </div>
 
-            <span class="hero__filename">profile.ts</span>
+            <span class="hero__filename">
+              profile.ts
+            </span>
           </div>
 
           <div class="hero__code">
@@ -80,13 +108,23 @@
 
         <div class="hero__info">
           <div class="hero__info-item">
-            <span>Фокус</span>
-            <p>Vue / Nuxt</p>
+            <span>
+              Фокус
+            </span>
+
+            <p>
+              Vue / Nuxt
+            </p>
           </div>
 
           <div class="hero__info-item">
-            <span>Формат</span>
-            <p>Сайти під ключ</p>
+            <span>
+              Формат
+            </span>
+
+            <p>
+              Сайти під ключ
+            </p>
           </div>
         </div>
       </div>
@@ -97,10 +135,15 @@
 <style lang="scss">
 .hero {
   position: relative;
+
   padding: 104px 0 64px;
+
   overflow: hidden;
+
   background-color: $primary-bg;
+
   border-bottom: 1px solid rgba($text-light, 0.1);
+
   box-sizing: border-box;
 
   @include breakpoint($tablet) {
@@ -109,15 +152,19 @@
   }
 
   @include breakpoint($tabletLandscape) {
-    min-height: 886px;
+    min-height: 968px;
+
     padding: 144px 32px 110px;
   }
 
   &::before {
     content: '';
+
     position: absolute;
     inset: 0;
+
     pointer-events: none;
+
     background-image:
       linear-gradient(
         rgba($text-light, 0.045) 1px,
@@ -128,6 +175,7 @@
         rgba($text-light, 0.045) 1px,
         transparent 1px
       );
+
     background-size: 80px 80px;
 
     @include breakpoint($tabletLandscape) {
@@ -136,37 +184,50 @@
   }
 
   &__container {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 0 20px;
-  box-sizing: border-box;
-  flex-direction: column;
-  gap: 64px;
+    position: relative;
+    z-index: 1;
 
-  @include flex(flex-start, stretch);
+    width: 100%;
+    max-width: 1180px;
 
-  @include breakpoint($tablet) {
-    padding-right: 32px;
-    padding-left: 32px;
+    margin: 0 auto;
+    padding: 0 20px;
+
+    box-sizing: border-box;
+
+    flex-direction: column;
+    gap: 64px;
+
+    @include flex(flex-start, stretch);
+
+    @include breakpoint($tablet) {
+      padding-right: 32px;
+      padding-left: 32px;
+    }
+
+    @include breakpoint($tabletLandscape) {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        365px;
+
+      align-items: start;
+
+      gap: 72px;
+
+      padding-right: 0;
+      padding-left: 0;
+    }
+
+    @include breakpoint($laptop) {
+      grid-template-columns:
+        minmax(0, 1fr)
+        365px;
+
+      gap: 100px;
+    }
   }
-
-  @include breakpoint($tabletLandscape) {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 365px;
-    align-items: start;
-    gap: 72px;
-    padding-right: 0;
-    padding-left: 0;
-  }
-
-  @include breakpoint($laptop) {
-    grid-template-columns: minmax(0, 1fr) 365px;
-    gap: 100px;
-  }
-}
 
   &__content {
     min-width: 0;
@@ -178,8 +239,10 @@
 
   &__eyebrow {
     position: relative;
+
     margin: 0 0 34px;
     padding-left: 44px;
+
     text-transform: uppercase;
     letter-spacing: 4px;
 
@@ -197,12 +260,16 @@
 
     &::before {
       content: '';
+
       position: absolute;
       top: 50%;
       left: 0;
+
       width: 30px;
       height: 1px;
+
       background-color: $color-accent;
+
       transform: translateY(-50%);
     }
 
@@ -213,7 +280,9 @@
 
   &__title {
     max-width: 720px;
+
     margin: 0;
+
     letter-spacing: -1.8px;
 
     @include font(
@@ -240,16 +309,21 @@
 
     span {
       position: relative;
+
       display: table;
+
       color: $color-accent;
 
       &::after {
         content: '';
+
         position: absolute;
         right: 0;
         bottom: -5px;
         left: 0;
+
         height: 1px;
+
         background-color: rgba($color-accent, 0.55);
       }
     }
@@ -257,6 +331,7 @@
 
   &__description {
     max-width: 590px;
+
     margin: 36px 0 0;
 
     @include font(
@@ -274,9 +349,11 @@
 
   &__actions {
     margin-top: 38px;
-    @include flex(flex-start, stretch);
-    flex-direction: column;
+
     gap: 12px;
+    flex-direction: column;
+
+    @include flex(flex-start, stretch);
 
     @include breakpoint($mobile) {
       align-items: center;
@@ -286,11 +363,18 @@
 
   &__button {
     min-height: 48px;
+
     padding: 0 26px;
+
+    gap: 7px;
+
     border: 1px solid transparent;
     border-radius: 999px;
+
     box-sizing: border-box;
+
     text-decoration: none;
+
     transition:
       color 0.25s ease,
       background-color 0.25s ease,
@@ -298,30 +382,53 @@
       transform 0.25s ease;
 
     @include flex(center, center);
-    @include font(14px, 1.2, $mainFontName, inherit, 500);
+
+    @include font(
+      14px,
+      1.2,
+      $mainFontName,
+      inherit,
+      500
+    );
+
+    svg {
+      flex-shrink: 0;
+
+      transition: transform 0.25s ease;
+    }
 
     &:hover {
       transform: translateY(-2px);
+
+      svg {
+        transform: translate(2px, -2px);
+      }
     }
 
     &--primary {
       color: $primary-bg;
+
       background-color: $color-accent;
+
       border-color: $color-accent;
 
       &:hover {
         color: $color-accent;
+
         background-color: transparent;
       }
     }
 
     &--secondary {
       color: $text-light;
+
       background-color: transparent;
+
       border-color: rgba($text-light, 0.2);
 
       &:hover {
         color: $color-accent;
+
         border-color: $color-accent;
       }
     }
@@ -330,24 +437,29 @@
   &__aside {
     width: 100%;
     max-width: 520px;
+
     margin: 0 auto;
 
     @include breakpoint($tabletLandscape) {
       max-width: 365px;
+
       margin-top: 12px;
     }
   }
 
   &__code-card {
     padding: 28px 20px 24px;
+
     background:
       linear-gradient(
         145deg,
         rgba($card-bg, 0.5),
         rgba($primary-bg, 0.65)
       );
+
     border: 1px solid rgba($text-light, 0.14);
     border-radius: 14px;
+
     box-sizing: border-box;
 
     @include breakpoint($mobile) {
@@ -357,19 +469,25 @@
 
   &__code-header {
     padding-bottom: 20px;
+
     gap: 14px;
+
     border-bottom: 1px solid rgba($text-light, 0.12);
+
     @include flex(flex-start, center);
   }
 
   &__code-dots {
     gap: 8px;
+
     @include flex(flex-start, center);
 
     span {
       width: 8px;
       height: 8px;
+
       background-color: rgba($text-light, 0.2);
+
       border-radius: 50%;
 
       &:last-child {
@@ -392,11 +510,14 @@
 
   &__code {
     padding-top: 17px;
+
     overflow-x: auto;
 
     p {
       min-width: max-content;
+
       margin: 0 0 13px;
+
       white-space: nowrap;
 
       @include font(
@@ -423,6 +544,7 @@
 
     strong {
       color: $text-light;
+
       font-weight: 400;
     }
   }
@@ -437,15 +559,20 @@
 
   &__info {
     display: grid;
+
     grid-template-columns: 1fr 1fr;
+
     margin-top: 24px;
+
+    overflow: hidden;
+
     border: 1px solid rgba($text-light, 0.14);
     border-radius: 14px;
-    overflow: hidden;
   }
 
   &__info-item {
     min-width: 0;
+
     padding: 22px 20px;
 
     @include breakpoint($mobile) {
@@ -458,7 +585,9 @@
 
     span {
       display: block;
+
       margin-bottom: 12px;
+
       text-transform: uppercase;
       letter-spacing: 3px;
 

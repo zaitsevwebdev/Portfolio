@@ -2,12 +2,41 @@
   <section id="contacts" class="contact">
     <div class="contact__container">
       <div class="contact__info">
+        <div class="contact__eyebrow">
+          <svg
+            class="contact__eyebrow-icon"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M9 1.5C9 5.64 12.36 9 16.5 9C12.36 9 9 12.36 9 16.5C9 12.36 5.64 9 1.5 9C5.64 9 9 5.64 9 1.5Z"
+              stroke="currentColor"
+              stroke-width="1.2"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <span>
+            Поговоримо про твій проєкт
+          </span>
+        </div>
+
         <h2 class="contact__title">
-          Обговоримо ваш проєкт
+          Є ідея?
+          <br>
+          Давай її
+          <br>
+          реалізуємо.
         </h2>
 
         <p class="contact__subtitle">
-          Залиште заявку або напишіть мені — відповім найближчим часом.
+          Розкажи коротко про свій бізнес або задачу.
+          Я допоможу зрозуміти, який формат сайту підійде
+          і з чого краще почати.
         </p>
 
         <div class="contact__links">
@@ -18,7 +47,10 @@
             rel="noopener noreferrer"
           >
             <span>Telegram</span>
-            <strong>@zaitsev_oleksandr</strong>
+
+            <strong>
+              @zaitsev_oleksandr
+            </strong>
           </a>
 
           <a
@@ -26,7 +58,10 @@
             class="contact__link"
           >
             <span>Email</span>
-            <strong>zaitsev.webdev@gmail.com</strong>
+
+            <strong>
+              zaitsev.webdev@gmail.com
+            </strong>
           </a>
         </div>
       </div>
@@ -90,7 +125,7 @@
             for="message"
             class="contact__label"
           >
-            Повідомлення
+            Про проєкт
           </label>
 
           <textarea
@@ -98,7 +133,7 @@
             v-model.trim="formData.message"
             class="contact__textarea"
             name="message"
-            placeholder="Коротко розкажіть про задачу, терміни та бажаний результат"
+            placeholder="Що потрібно зробити, для кого сайт і який результат хочеш отримати?"
             minlength="10"
             required
           />
@@ -146,7 +181,7 @@ const formData = reactive<FormData>({
   }
 
   @include breakpoint($tabletLandscape) {
-    padding: 96px 0 108px;
+    padding: 104px 0 112px;
   }
 
   &__container {
@@ -180,45 +215,63 @@ const formData = reactive<FormData>({
     min-width: 0;
   }
 
-  &__title {
-    max-width: 440px;
-    margin: 0 0 20px;
-    letter-spacing: -1.8px;
+  &__eyebrow {
+    width: fit-content;
+    margin-bottom: 28px;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 3.2px;
+    transform: rotate(2deg);
+    transform-origin: left center;
 
-    @include font(
-      42px,
-      1.04,
-      $mainFontName,
-      $text-light,
-      700
-    );
+    @include flex(flex-start, center);
+    @include font(11px, 1.3, $mainFontName, $color-accent, 600);
 
     @include breakpoint($tablet) {
-      font-size: 48px;
+      margin-bottom: 30px;
+      font-size: 12px;
+    }
+  }
+
+  &__eyebrow-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: $color-accent;
+  }
+
+  &__title {
+    max-width: 460px;
+    margin: 0 0 24px;
+    letter-spacing: -1.8px;
+
+    @include font(44px, 1.02, $mainFontName, $text-light, 700);
+
+    @include breakpoint($tablet) {
+      font-size: 52px;
+      letter-spacing: -2.2px;
+    }
+
+    @include breakpoint($tabletLandscape) {
+      font-size: 56px;
     }
   }
 
   &__subtitle {
-    max-width: 400px;
+    max-width: 420px;
     margin: 0;
 
-    @include font(
-      16px,
-      1.6,
-      $mainFontName,
-      $text-muted,
-      400
-    );
+    @include font(16px, 1.65, $mainFontName, $text-muted, 400);
   }
 
   &__links {
-    margin-top: 40px;
+    margin-top: 42px;
     overflow: hidden;
     border: 1px solid rgba($text-light, 0.15);
     border-radius: 14px;
 
     @include breakpoint($tabletLandscape) {
-      margin-top: 42px;
+      margin-top: 46px;
     }
   }
 
@@ -227,7 +280,9 @@ const formData = reactive<FormData>({
     padding: 0 20px;
     gap: 20px;
     text-decoration: none;
-    transition: background-color 0.25s ease;
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease;
 
     @include flex(space-between, center);
 
@@ -237,32 +292,25 @@ const formData = reactive<FormData>({
 
     &:hover {
       background-color: rgba($card-bg, 0.25);
+
+      strong {
+        color: $color-accent;
+      }
     }
 
     span {
       text-transform: uppercase;
       letter-spacing: 3px;
 
-      @include font(
-        10px,
-        1.2,
-        monospace,
-        $text-muted,
-        500
-      );
+      @include font(10px, 1.2, monospace, $text-muted, 500);
     }
 
     strong {
       overflow-wrap: anywhere;
       text-align: right;
+      transition: color 0.25s ease;
 
-      @include font(
-        13px,
-        1.3,
-        $mainFontName,
-        $text-light,
-        400
-      );
+      @include font(13px, 1.3, $mainFontName, $text-light, 400);
 
       @include breakpoint($mobile) {
         font-size: 14px;
@@ -316,13 +364,7 @@ const formData = reactive<FormData>({
     display: block;
     margin-bottom: 10px;
 
-    @include font(
-      13px,
-      1.3,
-      $mainFontName,
-      $text-muted,
-      400
-    );
+    @include font(13px, 1.3, $mainFontName, $text-muted, 400);
   }
 
   &__input,
@@ -336,15 +378,10 @@ const formData = reactive<FormData>({
     box-sizing: border-box;
     transition:
       border-color 0.25s ease,
-      box-shadow 0.25s ease;
+      box-shadow 0.25s ease,
+      background-color 0.25s ease;
 
-    @include font(
-      15px,
-      1.5,
-      $mainFontName,
-      $text-light,
-      400
-    );
+    @include font(15px, 1.5, $mainFontName, $text-light, 400);
 
     &::placeholder {
       color: rgba($text-muted, 0.7);
@@ -355,6 +392,7 @@ const formData = reactive<FormData>({
     }
 
     &:focus {
+      background-color: rgba($primary-bg, 0.55);
       border-color: $color-accent;
       box-shadow: 0 0 0 3px rgba($color-accent, 0.08);
     }
@@ -377,8 +415,9 @@ const formData = reactive<FormData>({
 
   &__form-footer {
     gap: 24px;
-    @include flex(space-between, center);
     flex-wrap: wrap;
+
+    @include flex(space-between, center);
   }
 
   &__submit {
@@ -394,13 +433,7 @@ const formData = reactive<FormData>({
       background-color 0.25s ease,
       transform 0.25s ease;
 
-    @include font(
-      14px,
-      1.2,
-      $mainFontName,
-      $primary-bg,
-      600
-    );
+    @include font(14px, 1.2, $mainFontName, $primary-bg, 600);
 
     &:hover {
       color: $color-accent;
@@ -413,13 +446,7 @@ const formData = reactive<FormData>({
     text-transform: uppercase;
     letter-spacing: 2px;
 
-    @include font(
-      9px,
-      1.4,
-      monospace,
-      $text-muted,
-      500
-    );
+    @include font(9px, 1.4, monospace, $text-muted, 500);
   }
 }
 </style>

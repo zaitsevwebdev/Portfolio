@@ -2,13 +2,39 @@
   <section id="advantages" class="advantages">
     <div class="advantages__container">
       <div class="advantages__header">
+        <div class="advantages__eyebrow">
+          <svg
+            class="advantages__eyebrow-icon"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M9 1.5C9 5.64 12.36 9 16.5 9C12.36 9 9 12.36 9 16.5C9 12.36 5.64 9 1.5 9C5.64 9 9 5.64 9 1.5Z"
+              stroke="currentColor"
+              stroke-width="1.2"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <span>
+            Що ти отримаєш
+          </span>
+        </div>
+
         <h2 class="advantages__title">
-          Що ви отримаєте
+          Не просто сайт —
+          <br>
+          а нормальний результат
         </h2>
 
-        <span class="advantages__label">
-          01 — Підхід
-        </span>
+        <p class="advantages__subtitle">
+          Продуманий сайт, який добре виглядає, зрозуміло працює
+          і не створює проблем після запуску.
+        </p>
       </div>
 
       <div class="advantages__grid">
@@ -18,24 +44,43 @@
             advantages__card--adaptive
           "
         >
-          <span class="advantages__number">01</span>
+          <span class="advantages__number">
+            01
+          </span>
 
           <h3 class="advantages__card-title">
-            Адаптивність
+            Добре виглядає всюди
           </h3>
 
           <p class="advantages__description">
-            Сайт коректно виглядає й працює на телефоні, планшеті
-            та десктопі — без зламаних блоків і горизонтального скролу.
+            Сайт адаптується під телефон, планшет і великий екран,
+            щоб клієнту було зручно незалежно від пристрою.
           </p>
 
           <div
             class="advantages__devices"
             aria-hidden="true"
           >
-            <span class="advantages__device advantages__device--phone" />
-            <span class="advantages__device advantages__device--tablet" />
-            <span class="advantages__device advantages__device--desktop" />
+            <span
+              class="
+                advantages__device
+                advantages__device--phone
+              "
+            />
+
+            <span
+              class="
+                advantages__device
+                advantages__device--tablet
+              "
+            />
+
+            <span
+              class="
+                advantages__device
+                advantages__device--desktop
+              "
+            />
           </div>
         </article>
 
@@ -45,14 +90,17 @@
             advantages__card--interface
           "
         >
-          <span class="advantages__number">02</span>
+          <span class="advantages__number">
+            02
+          </span>
 
           <h3 class="advantages__card-title">
-            Зрозумілий інтерфейс
+            Зрозуміло для клієнта
           </h3>
 
           <p class="advantages__description">
-            Проста структура й акценти, які ведуть відвідувача до заявки.
+            Без хаосу й зайвих блоків. Людина швидко розуміє,
+            хто ти, що пропонуєш і куди натиснути далі.
           </p>
         </article>
 
@@ -62,14 +110,17 @@
             advantages__card--speed
           "
         >
-          <span class="advantages__number">03</span>
+          <span class="advantages__number">
+            03
+          </span>
 
           <h3 class="advantages__card-title">
-            Швидке завантаження
+            Без зайвого очікування
           </h3>
 
           <p class="advantages__description">
-            Оптимізовані зображення, легкий код і мінімум зайвих залежностей.
+            Оптимізую зображення, код і основні ресурси,
+            щоб сайт завантажувався швидко й не дратував відвідувачів.
           </p>
         </article>
 
@@ -79,14 +130,17 @@
             advantages__card--support
           "
         >
-          <span class="advantages__number">04</span>
+          <span class="advantages__number">
+            04
+          </span>
 
           <h3 class="advantages__card-title">
-            Підтримка після запуску
+            Не зникаю після запуску
           </h3>
 
           <p class="advantages__description">
-            Допомагаю з правками, оновленням контенту й дрібними доробками.
+            Якщо після публікації потрібно щось поправити,
+            оновити або пояснити — залишаюсь на зв’язку.
           </p>
         </article>
       </div>
@@ -105,7 +159,7 @@
   }
 
   @include breakpoint($tabletLandscape) {
-    padding: 96px 0 108px;
+    padding: 104px 0 112px;
   }
 
   &__container {
@@ -127,43 +181,74 @@
   }
 
   &__header {
-    margin-bottom: 44px;
-    gap: 24px;
-    @include flex(space-between, flex-end);
+    max-width: 700px;
+    margin-bottom: 48px;
 
-    @include breakpoint($tabletLandscape) {
+    @include breakpoint($tablet) {
       margin-bottom: 56px;
     }
+
+    @include breakpoint($tabletLandscape) {
+      margin-bottom: 64px;
+    }
+  }
+
+  &__eyebrow {
+    width: fit-content;
+    margin-bottom: 28px;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 3.2px;
+    transform: rotate(2deg);
+    transform-origin: left center;
+
+    @include flex(flex-start, center);
+    @include font(11px, 1.3, $mainFontName, $color-accent, 600);
+
+    @include breakpoint($tablet) {
+      margin-bottom: 30px;
+      font-size: 12px;
+    }
+  }
+
+  &__eyebrow-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: $color-accent;
   }
 
   &__title {
     margin: 0;
-    letter-spacing: -1px;
-    @include font(30px, 1.15, $mainFontName, $text-light, 700);
+    letter-spacing: -1.4px;
+
+    @include font(34px, 1.08, $mainFontName, $text-light, 700);
+
+    @include breakpoint($mobile) {
+      font-size: 38px;
+    }
 
     @include breakpoint($tablet) {
-      font-size: 36px;
+      font-size: 46px;
     }
   }
 
-  &__label {
-    display: none;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    white-space: nowrap;
-    @include font(10px, 1.2, monospace, $text-muted, 500);
+  &__subtitle {
+    max-width: 560px;
+    margin: 20px 0 0;
+
+    @include font(15px, 1.7, $mainFontName, $text-muted, 400);
 
     @include breakpoint($tablet) {
-      display: block;
+      font-size: 16px;
     }
   }
 
   &__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1px;
     overflow: hidden;
-    background-color: rgba($text-light, 0.14);
+    background-color: $primary-bg;
     border: 1px solid rgba($text-light, 0.14);
     border-radius: 16px;
 
@@ -183,11 +268,20 @@
     overflow: hidden;
     background-color: $primary-bg;
     box-sizing: border-box;
-    transition: background-color 0.3s ease;
+    border-bottom: 1px solid rgba($text-light, 0.14);
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease;
+
+    &:last-child {
+      border-bottom: 0;
+    }
 
     @include breakpoint($tablet) {
       min-height: 270px;
       padding: 38px 32px;
+      border-bottom: 1px solid rgba($text-light, 0.14);
+      border-right: 0;
     }
 
     @include breakpoint($tabletLandscape) {
@@ -205,32 +299,54 @@
       @include breakpoint($tablet) {
         grid-column: 1 / -1;
         min-height: 400px;
+        border-bottom: 1px solid rgba($text-light, 0.14);
       }
 
       @include breakpoint($tabletLandscape) {
         grid-column: span 4;
         min-height: 402px;
         padding: 54px 48px 48px;
+        border-right: 1px solid rgba($text-light, 0.14);
+        border-bottom: 1px solid rgba($text-light, 0.14);
       }
     }
 
     &--interface {
+      @include breakpoint($tablet) {
+        border-right: 1px solid rgba($text-light, 0.14);
+        border-bottom: 1px solid rgba($text-light, 0.14);
+      }
+
       @include breakpoint($tabletLandscape) {
         grid-column: span 2;
         min-height: 402px;
         padding: 54px 40px;
+        border-right: 0;
+        border-bottom: 1px solid rgba($text-light, 0.14);
       }
     }
 
     &--speed {
+      @include breakpoint($tablet) {
+        border-bottom: 1px solid rgba($text-light, 0.14);
+      }
+
       @include breakpoint($tabletLandscape) {
         grid-column: span 3;
+        border-right: 1px solid rgba($text-light, 0.14);
+        border-bottom: 0;
       }
     }
 
     &--support {
+      @include breakpoint($tablet) {
+        grid-column: 1 / -1;
+        border-bottom: 0;
+      }
+
       @include breakpoint($tabletLandscape) {
         grid-column: span 3;
+        border-bottom: 0;
       }
     }
   }
@@ -239,6 +355,7 @@
     display: block;
     margin-bottom: 24px;
     letter-spacing: 1px;
+
     @include font(11px, 1.2, monospace, $color-accent, 500);
 
     @include breakpoint($tabletLandscape) {
@@ -250,6 +367,7 @@
     max-width: 420px;
     margin: 0 0 18px;
     letter-spacing: -0.5px;
+
     @include font(23px, 1.2, $mainFontName, $text-light, 700);
 
     @include breakpoint($tablet) {
@@ -264,6 +382,7 @@
   &__description {
     max-width: 470px;
     margin: 0;
+
     @include font(15px, 1.65, $mainFontName, $text-muted, 400);
 
     @include breakpoint($tablet) {
@@ -277,8 +396,9 @@
     bottom: 32px;
     left: 24px;
     height: 100px;
-    @include flex(flex-start, flex-end);
     gap: 12px;
+
+    @include flex(flex-start, flex-end);
 
     @include breakpoint($mobile) {
       right: 32px;
