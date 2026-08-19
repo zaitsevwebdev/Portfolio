@@ -128,7 +128,7 @@ const handleScroll = () => {
                 <div class="portfolio__image-wrapper">
                   <img
                     :src="project.image"
-                    :alt="`${project.title} — ${project.type}`"
+                    :alt="`${project.title} - ${project.type}`"
                     class="portfolio__image"
                     loading="lazy"
                   >
